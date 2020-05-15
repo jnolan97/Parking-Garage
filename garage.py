@@ -31,20 +31,21 @@ class ParkingGarage():
         else:
             self.paid["paid"] = False
 
+
+
         
     
                 
                 
 def run():
     driver = ParkingGarage(0,[1,2,3],[1,2,3],[],{'paid':False})
-    
     while True:
         response = input("What do you want to do?")
-        
         if response.lower() == "park":
             driver.takeTicket()
         if response.lower() == "pay":
             driver.payForParking()
-        elif response.lower() == "exit":
+            has_paid = True
+        if response.lower() == "exit":
+            print("Have a nice day.")
             break
-run()
