@@ -9,24 +9,19 @@ class ParkingGarage():
     
     
     def takeTicket(self):
-        # ticket_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        # parking_spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-        # reserved = []
-        
+        if not self.ticket_list:
+            print("Sorry we're full!")
         for i in self.ticket_list:
-            if self.ticket_list == []:
-                print("Sorry! We're full.")
-           
-            elif i not in self.reserved:
-                assign = i
-                self.reserved.append(assign)
-                self.ticket_list.remove(assign)
-                self.parking_spaces.remove(assign)
-                
-                print(f"Your ticket is, {assign}")
+            # if self.ticket_list == []:
+            #     print("Sorry! We're full.")
+            if i not in self.reserved:
+                    #assign = i
+                self.reserved.append(i)
+                self.ticket_list.remove(i)
+                self.parking_spaces.remove(i)
+                print(f"Your ticket is, {i}")
                 break
-        return assign
+                #return assign
    
     def payForParking(self):
         while True:
@@ -38,12 +33,25 @@ class ParkingGarage():
             if int(answer) <= 0:
                 self.paid["paid"] = False
                 print("Please pay the ticket fee.")
+    def removeDriver(self):
+        user = int(input("Which driver are you checking out? "))
+        for drivers in self.reserved:
+            if user == drivers:
+                self.reserved.remove(drivers)
+                self.ticket_list.append(drivers)
+                self.parking_spaces.append(drivers)
+                self.ticket_list.sort()
+                self.parking_spaces.sort()
 
     def showAvailable(self):
         print("Tickets Available: ", self.ticket_list)
         print("Parking Spaces Available: ", self.parking_spaces)
-            
-
+    
+    def needToPay(self):
+        if self.reserved:
+            return True
+        else:
+            return False
 
 
 
@@ -53,31 +61,23 @@ class ParkingGarage():
                 
 def run():
     driver = ParkingGarage(0,[1,2,3],[1,2,3],[],{'paid':False})
-<<<<<<< HEAD
-    while True:
-        response = input("What do you want to do?")
-=======
    
     
     while True:
-        response = input("What do you want to do: park/exit/show?")
+        response = input("What do you want to do: park/exit/show/checkout?")
         
->>>>>>> upstream/master
         if response.lower() == "park":
             driver.takeTicket()
         if response.lower() == "show":
             driver.showAvailable()
-        
-        if response.lower() == "exit":
+        if response.lower() == "checkout":
+            driver.removeDriver()
             driver.payForParking()
-<<<<<<< HEAD
-            has_paid = True
-        if response.lower() == "exit":
-            print("Have a nice day.")
+        if response.lower() == "exit" and driver.needToPay() == True:
+            driver.payForParking()
             break
-=======
+        if response.lower() == "exit" and driver.needToPay() == False:
             break
-        
     
         
             
@@ -87,4 +87,3 @@ def run():
 
 
 run()
->>>>>>> upstream/master
