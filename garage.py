@@ -15,21 +15,35 @@ class ParkingGarage():
         # reserved = []
         
         for i in self.ticket_list:
-            if i not in self.reserved:
+            if self.ticket_list == []:
+                print("Sorry! We're full.")
+           
+            elif i not in self.reserved:
                 assign = i
                 self.reserved.append(assign)
                 self.ticket_list.remove(assign)
                 self.parking_spaces.remove(assign)
+                
+                print(f"Your ticket is, {assign}")
                 break
-        print(f"Your ticket is, {assign}")
         return assign
+   
     def payForParking(self):
-        answer = input("Pay x amount: ")
-        if int(answer) > 0:
-            self.paid["paid"] = True
-            print("Youre ticket has been payed you have 15 minutes to leave.")
-        else:
-            self.paid["paid"] = False
+        while True:
+            answer = input("Pay x amount: ")
+            if int(answer) > 0:
+                self.paid["paid"] = True
+                print("Youre ticket has been payed you have 15 minutes to leave. \nHave a nice day!")
+                break
+            if int(answer) <= 0:
+                self.paid["paid"] = False
+                print("Please pay the ticket fee.")
+
+    def showAvailable(self):
+        print("Tickets Available: ", self.ticket_list)
+        print("Parking Spaces Available: ", self.parking_spaces)
+            
+
 
 
 
@@ -39,13 +53,38 @@ class ParkingGarage():
                 
 def run():
     driver = ParkingGarage(0,[1,2,3],[1,2,3],[],{'paid':False})
+<<<<<<< HEAD
     while True:
         response = input("What do you want to do?")
+=======
+   
+    
+    while True:
+        response = input("What do you want to do: park/exit/show?")
+        
+>>>>>>> upstream/master
         if response.lower() == "park":
             driver.takeTicket()
-        if response.lower() == "pay":
+        if response.lower() == "show":
+            driver.showAvailable()
+        
+        if response.lower() == "exit":
             driver.payForParking()
+<<<<<<< HEAD
             has_paid = True
         if response.lower() == "exit":
             print("Have a nice day.")
             break
+=======
+            break
+        
+    
+        
+            
+    
+
+
+
+
+run()
+>>>>>>> upstream/master
