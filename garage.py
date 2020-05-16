@@ -1,3 +1,4 @@
+from collections import OrderedDict
 class ParkingGarage():
 
     def __init__(self, ticket,ticket_list,parking_spaces,reserved,paid):
@@ -19,6 +20,7 @@ class ParkingGarage():
                 self.reserved.append(i)
                 self.ticket_list.remove(i)
                 self.parking_spaces.remove(i)
+                self.paid["paid"] = False
                 print(f"Your ticket is, {i}")
                 break
                 #return assign
@@ -40,12 +42,15 @@ class ParkingGarage():
                 self.reserved.remove(drivers)
                 self.ticket_list.append(drivers)
                 self.parking_spaces.append(drivers)
+                self.paid["paid"] = True
                 self.ticket_list.sort()
                 self.parking_spaces.sort()
 
     def showAvailable(self):
         print("Tickets Available: ", self.ticket_list)
         print("Parking Spaces Available: ", self.parking_spaces)
+        for v in self.paid.values():
+            print("has payed: ", v)
     
     def needToPay(self):
         if self.reserved:
